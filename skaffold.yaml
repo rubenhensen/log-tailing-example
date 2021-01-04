@@ -1,0 +1,26 @@
+apiVersion: skaffold/v2beta10
+kind: Config
+metadata:
+  name: tamf
+build:
+  artifacts:
+  - image: console1
+    context: .
+    docker:
+      dockerfile: ConsoleApp1/Dockerfile
+  - image: console2
+    context: .
+    docker:
+      dockerfile: ConsoleApp2/Dockerfile
+deploy:
+  helm:
+    releases:
+    - name: console1
+      chartPath: standard
+      artifactOverrides:
+        image: console1
+
+    - name: console2
+      chartPath: standard
+      artifactOverrides:
+        image: console2
